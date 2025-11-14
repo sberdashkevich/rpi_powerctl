@@ -9,7 +9,7 @@ import (
 )
 
 func rebootHandler(w http.ResponseWriter, r *http.Request) {
-	cmd := exec.Command("reboot")
+	cmd := exec.Command("/usr/sbin/reboot")
 	if err := cmd.Start(); err != nil {
 		http.Error(w, "failed to execute reboot: "+err.Error(), http.StatusInternalServerError)
 		return
@@ -18,7 +18,7 @@ func rebootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func shutdownHandler(w http.ResponseWriter, r *http.Request) {
-	cmd := exec.Command("shutdown", "-h", "now")
+	cmd := exec.Command("/usr/sbin/shutdown", "-h", "now")
 	if err := cmd.Start(); err != nil {
 		http.Error(w, "failed to execute shutdown: "+err.Error(), http.StatusInternalServerError)
 		return
